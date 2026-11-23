@@ -50,6 +50,9 @@ app.use(express.static(distPath, {
 }));
 
 app.get("/health", (req, res) => {
+    // Polled by the wake-up screen, possibly from a separately hosted frontend.
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Cache-Control", "no-store");
     res.status(200).json({ status: "ok" });
 });
 

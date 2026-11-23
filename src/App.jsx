@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PwaStatus from "@/components/PwaStatus";
+import ServerWake from "@/components/ServerWake";
 import HomePage from "@/pages/HomePage";
 import NotFoundPage from "@/pages/NotFoundPage";
 import PageSkeleton from "@/components/PageSkeleton";
@@ -19,6 +20,7 @@ export default function App() {
         <div className="flex min-h-dvh flex-col">
           <Navbar />
           <PwaStatus />
+          <ServerWake />
           <main className="mx-auto w-full max-w-5xl flex-1 px-4 py-8 sm:px-6 sm:py-12">
             <Suspense fallback={<PageSkeleton />}>
               <Routes>

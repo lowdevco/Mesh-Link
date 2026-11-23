@@ -33,13 +33,13 @@ function isDirectDiskSupported() {
   return typeof window !== "undefined" && "showSaveFilePicker" in window;
 }
 
+// VITE_BACKEND_URL lets the frontend live on a static host (never sleeps) while signalling runs elsewhere.
 export function getBackendUrls() {
   const isHttp = window.location.protocol.startsWith("http");
-  const backendUrl = isHttp ? window.location.origin : "http://localhost:3000";
-  const wsUrl = isHttp
-    ? (window.location.protocol === "https:" ? "wss://" : "ws://") + window.location.host + "/ws"
-    : "ws://localhost:3000/ws";
-  return { backendUrl, wsUrl };
+  const backendUrl =
+    (import.meta.env.VITE_BACKEND_URL || "").replace(/\/$/, "") ||
+    (isHttp ? window.location.origin : "http://localhost:3000");
+  return { backendUrl, wsUrl: backendUrl.replace(/^http/, "ws") + "/ws" };
 }
 
 export class MeshLinkConnection {

@@ -36,6 +36,7 @@ import DeviceLink from "@/components/DeviceLink";
 import TransferProgress from "@/components/TransferProgress";
 import FileIcon, { fileKind } from "@/components/FileIcon";
 import RoomCode from "@/components/RoomCode";
+import { SameNetworkNote } from "@/components/NetworkTips";
 import { getDeviceInfo, formatBytes } from "@/utils/deviceInfo";
 import { MeshLinkConnection } from "@/utils/webrtc";
 import { requestNotificationPermission } from "@/utils/notifications";
@@ -286,6 +287,7 @@ export default function ReceivePage() {
                 </AlertDescription>
               </Alert>
             )}
+            <SameNetworkNote />
           </CardContent>
         </Card>
 

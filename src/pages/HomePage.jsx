@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Download, Lock, QrCode, Send, Smartphone, HardDrive } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { SameNetworkNote } from "@/components/NetworkTips";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const actions = [
@@ -31,7 +32,7 @@ const features = [
 
 const steps = [
   ["Create a room", "The sender gets a one-time code and QR."],
-  ["Connect", "The receiver enters the code or scans the QR."],
+  ["Connect", "On the same Wi-Fi or hotspot, the receiver enters the code or scans the QR."],
   ["Transfer", "Files stream directly, device to device."],
 ];
 
@@ -66,6 +67,7 @@ export default function HomePage() {
             </Link>
           </Button>
         </div>
+        <SameNetworkNote className="mt-5" />
       </section>
 
       {/* Primary actions */}

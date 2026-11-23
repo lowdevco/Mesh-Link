@@ -7,7 +7,6 @@ import { useRegisterSW } from "virtual:pwa-register/react";
 export default function PwaStatus() {
   const {
     needRefresh: [needRefresh],
-    offlineReady: [offlineReady, setOfflineReady],
     updateServiceWorker,
   } = useRegisterSW({
     onRegisterError: (err) => console.warn("Service worker registration failed:", err),
@@ -24,14 +23,6 @@ export default function PwaStatus() {
     });
   }, [needRefresh, updateServiceWorker]);
 
-  useEffect(() => {
-    if (!offlineReady) return;
-    toast.success("Installed for quick launch", {
-      id: "pwa-ready",
-      description: "MeshLink opens offline. Connecting devices still needs a network.",
-    });
-    setOfflineReady(false);
-  }, [offlineReady, setOfflineReady]);
 
   const [online, setOnline] = useState(() => (typeof navigator === "undefined" ? true : navigator.onLine));
   useEffect(() => {

@@ -30,6 +30,7 @@ import { getDeviceInfo, formatBytes, makeRoomCode } from "@/utils/deviceInfo";
 import { MeshLinkConnection, getBackendUrls } from "@/utils/webrtc";
 import { requestNotificationPermission } from "@/utils/notifications";
 import { cn } from "@/lib/utils";
+import { SameNetworkNote } from "@/components/NetworkTips";
 
 // phase: "idle" → "creating" → "waiting" ⇄ "connected"; any → "error"
 export default function SendPage() {
@@ -252,6 +253,7 @@ export default function SendPage() {
                 </div>
               </div>
             )}
+            <SameNetworkNote className="mt-5" />
           </CardContent>
         </Card>
 

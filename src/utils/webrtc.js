@@ -14,6 +14,7 @@ const LARGE_FILE_THRESHOLD = 300 * 1024 * 1024; // 300 MB threshold
 const CHUNK_SIZE = 64 * 1024;
 const BUFFER_LIMIT = 4 * 1024 * 1024;
 const SIGNAL_TIMEOUT = 15000;
+const LINK_TIMEOUT = 30000; // browsers can sit in ICE "checking" for minutes without ever reporting failure
 const PROGRESS_INTERVAL_MS = 100; // per-chunk setState re-rendered React thousands of times a second
 
 // Peer-supplied paths end up in ZIP entries: drop "..", absolute and drive prefixes.
@@ -148,6 +149,12 @@ export class MeshLinkConnection {
         }
 
         if (data.type === "peer-joined") {
+          clearTimeout(this.linkTimer);
+          this.linkTimer = setTimeout(() => {
+            if (this.channel?.readyState === "open") return;
+            this.resetPeer();
+            this.onStatusChange("Couldn't connect directly. Put both devices on the same Wi-Fi or hotspot.", "bad");
+          }, LINK_TIMEOUT);
           this.onStatusChange("Peer discovered. Establishing direct link…", "warn");
           if (this.role === "send") {
             await this.startOffer();
@@ -189,6 +196,7 @@ export class MeshLinkConnection {
         }
 
         if (data.type === "peer-left") {
+          clearTimeout(this.linkTimer);
           this.onStatusChange("Connected peer disconnected.", "warn");
           this.connected = false;
           this.onPeerDisconnected();
@@ -271,6 +279,7 @@ export class MeshLinkConnection {
     channel.bufferedAmountLowThreshold = BUFFER_LIMIT / 2;
 
     channel.onopen = () => {
+      clearTimeout(this.linkTimer);
       this.connected = true;
       this.onStatusChange("Direct P2P link connected!", "good");
       this.onPeerConnected(this.role === "send" ? "Receiving device" : "Sending device");
@@ -738,6 +747,7 @@ export class MeshLinkConnection {
 
   close() {
     this.isClosed = true;
+    clearTimeout(this.linkTimer);
     this.resetPeer();
     if (this.ws) {
       this.ws.onopen = this.ws.onmessage = this.ws.onerror = this.ws.onclose = null;

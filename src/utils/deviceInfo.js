@@ -44,11 +44,8 @@ export function formatBytes(bytes) {
   return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + " " + sizes[i];
 }
 
+// 6 chars from 32 symbols ≈ 1 billion codes (4 chars was ~1M and guessable); crypto RNG, not Math.random.
 export function makeRoomCode() {
-  const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-  let code = "";
-  for (let i = 0; i < 4; i++) {
-    code += alphabet[Math.floor(Math.random() * alphabet.length)];
-  }
-  return code;
+  const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // 32 symbols, so % has no bias
+  return Array.from(crypto.getRandomValues(new Uint8Array(6)), (b) => alphabet[b % 32]).join("");
 }

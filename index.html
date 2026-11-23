@@ -1,19 +1,51 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#080d19" />
-    <title>MeshLink — Direct P2P File Sharing</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
-      rel="stylesheet"
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>MeshLink — Private, seamless file transfer</title>
+    <meta
+      name="description"
+      content="Device to device, nothing in between. Share files of any size privately and instantly: never uploaded, no account needed."
     />
+    <meta name="theme-color" content="#0b0c12" />
+    <meta name="color-scheme" content="dark" />
+
+    <!-- Icons -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon-180x180.png" />
+
+    <!-- Installed app (iOS) -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="MeshLink" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <!-- Social previews (set VITE_SITE_URL at build time for absolute URLs) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="MeshLink" />
+    <meta property="og:title" content="MeshLink — Device to device. Nothing in between." />
+    <meta
+      property="og:description"
+      content="Private, instant file transfer. Never uploaded, no account, any size."
+    />
+    <meta property="og:url" content="%VITE_SITE_URL%/" />
+    <meta property="og:image" content="%VITE_SITE_URL%/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="MeshLink: Device to device. Nothing in between." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="MeshLink — Device to device. Nothing in between." />
+    <meta
+      name="twitter:description"
+      content="Private, instant file transfer. Never uploaded, no account, any size."
+    />
+    <meta name="twitter:image" content="%VITE_SITE_URL%/og-image.png" />
   </head>
-  <body>
+  <body style="background: #0b0c12">
     <div id="root"></div>
+    <noscript>MeshLink needs JavaScript to connect devices.</noscript>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
